@@ -1,7 +1,8 @@
+from readline import set_auto_history
+
+
 class Fight:
-    """A Flight with a particular passenger aircraft."""
-
-
+    
     def __init__(self, number, aircraft):
         if not number[:2].isalpha():
             raise ValueError(f"No airline code in '{number}'")
@@ -14,6 +15,9 @@ class Fight:
 
         self._number = number
         self._aircraft = aircraft
+        rows, seats = self._aircraft.seating_plan()
+        self._seating = [None] + [{letter: None for letter  in seats} for _ in rows]
+
 
     def aircraft_model(self):
         return self._aircraft.model()
